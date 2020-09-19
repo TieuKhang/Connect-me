@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
@@ -30,10 +31,10 @@ app.post("/", function (req, res) {
         }]
     }
     var subscribePerson = JSON.stringify(data);
-    const url = "https://us18.api.mailchimp.com/3.0/lists/85b60ae405";
+    const url = process.env.API_URL;
     const options = {
         method : "POST",
-        auth: "tieukhang:612d98c4969932de8af3ab36edf13678-us18"
+        auth: process.env.AUTH
     };
     console.log(firstName, " ", lastName);
     const request = https.request(url, options, function (response) {
@@ -52,7 +53,3 @@ app.post("/", function (req, res) {
 app.post("/failure", function (req, res) {
     res.redirect("/");
 })
-//API key
-//db95e7cfdf516ee0ac0090510f779fd7-us18
-//listID
-//85b60ae405
